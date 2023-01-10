@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
 
+# NeoGo host + port
+NEOGO_HOST="${NEOGO_HOST:-http://localhost:30333}"
+
+# Morph container name
+MORPH_CONTAINER_NAME="${MORPH_CONTAINER_NAME:-morph}"
+
 # NeoGo binary path.
-NEOGO="${NEOGO:-docker exec -it morph neo-go}"
+NEOGO="${NEOGO:-docker exec -it ${MORPH_CONTAINER_NAME} neo-go}"
 
 # Wallet files to change config value
 WALLET="${WALLET:-./morph/node-wallet.json}"
@@ -28,7 +34,7 @@ echo "Changing ${KEY} configration value to ${VALUE}"
 ./bin/passwd.exp ${PASSWD} ${NEOGO} contract invokefunction \
 -w ${WALLET_IMG} \
 -a ${ADDR} \
--r http://localhost:30333 \
+-r ${NEOGO_HOST} \
 ${NETMAP_ADDR} \
 setConfig bytes:beefcafe \
 string:${KEY} \
