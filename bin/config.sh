@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo
+
 # NeoGo host + port
 NEOGO_HOST="${NEOGO_HOST:-http://localhost:30333}"
 
@@ -8,9 +10,6 @@ MORPH_CONTAINER_NAME="${MORPH_CONTAINER_NAME:-morph}"
 
 # NeoGo binary path.
 NEOGO="${NEOGO:-docker exec -it ${MORPH_CONTAINER_NAME} neo-go}"
-
-echo neogo:                "$NEOGO"
-echo morph_container_name: "$MORPH_CONTAINER_NAME"
 
 # Wallet files to change config value
 WALLET="${WALLET:-./morph/node-wallet.json}"
@@ -35,11 +34,14 @@ ADDR=`cat ${WALLET} | jq -r .accounts[2].address`
 # Change config value in side chain
 echo "Changing ${KEY} configration value to ${VALUE}"
 
-echo passwd:      "$PASSWD"
+echo -------
+echo config.sh
+echo neogo_host:  "$NEOGO_HOST"
+echo morph_container_name: "$MORPH_CONTAINER_NAME"
 echo neogo:       "$NEOGO"
+echo passwd:      "$PASSWD"
 echo wallet_img:  "$WALLET_IMG"
 echo addr:        "$ADDR"
-echo neogo_host:  "$NEOGO_HOST"
 echo netmap_addr: "$NETMAP_ADDR"
 echo key:         "$KEY"
 echo value:       "$VALUE"
