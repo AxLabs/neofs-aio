@@ -9,6 +9,9 @@ MORPH_CONTAINER_NAME="${MORPH_CONTAINER_NAME:-morph}"
 # NeoGo binary path.
 NEOGO="${NEOGO:-docker exec -it ${MORPH_CONTAINER_NAME} neo-go}"
 
+echo neogo:                "$NEOGO"
+echo morph_container_name: "$MORPH_CONTAINER_NAME"
+
 # Wallet files to change config value
 WALLET="${WALLET:-./morph/node-wallet.json}"
 WALLET_IMG="${WALLET_IMG:-config/node-wallet.json}"
@@ -31,6 +34,17 @@ ADDR=`cat ${WALLET} | jq -r .accounts[2].address`
 
 # Change config value in side chain
 echo "Changing ${KEY} configration value to ${VALUE}"
+
+echo passwd:      "$PASSWD"
+echo neogo:       "$NEOGO"
+echo wallet_img:  "$WALLET_IMG"
+echo addr:        "$ADDR"
+echo neogo_host:  "$NEOGO_HOST"
+echo netmap_addr: "$NETMAP_ADDR"
+echo key:         "$KEY"
+echo value:       "$VALUE"
+
+
 ./bin/passwd.exp ${PASSWD} ${NEOGO} contract invokefunction \
 -w ${WALLET_IMG} \
 -a ${ADDR} \
