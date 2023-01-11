@@ -34,7 +34,6 @@ ADDR=`cat ${WALLET} | jq -r .accounts[2].address`
 # Change config value in side chain
 echo "Changing ${KEY} configration value to ${VALUE}"
 
-echo -------
 echo config.sh
 echo neogo_host:  "$NEOGO_HOST"
 echo morph_container_name: "$MORPH_CONTAINER_NAME"
